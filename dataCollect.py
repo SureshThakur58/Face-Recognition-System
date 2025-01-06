@@ -2,7 +2,7 @@ import cv2
 from mtcnn import MTCNN
 import os
 
-def collect_face_data(person_name, output_dir='data', max_images=50):
+def collect_face_data(person_name, output_dir='data', max_images=80):
     """
     Collect face data and save in a structured directory format: data/PersonName/.
     
@@ -46,8 +46,8 @@ def collect_face_data(person_name, output_dir='data', max_images=50):
                 file_path = os.path.join(person_dir, f"{person_name}_{img_id}.jpg")
                 cv2.imwrite(file_path, face_resized)
                 
-                # Display the collected face
-                cv2.putText(frame, f"{person_name} ({img_id})", (x, y - 10),
+                # Display only the ID number in the label (no name)
+                cv2.putText(frame, f"ID: {img_id}", (x, y - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
                 cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 255, 0), 2)
 
@@ -63,5 +63,4 @@ def collect_face_data(person_name, output_dir='data', max_images=50):
     print(f"Collected {img_id} images for {person_name} in {person_dir}")
 
 # Collect data for a person
-collect_face_data(person_name="Naresh", max_images=50)
-
+collect_face_data(person_name="Suresh", max_images=80)
